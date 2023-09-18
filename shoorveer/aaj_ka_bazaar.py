@@ -23,27 +23,31 @@ def run():
         sell_quantity = position['sell_quantity']
         order_type = None
         quantity = 0
+        symbol = position['tradingsymbol']
+        current_price = dukaandaar.price(position['tradingsymbol'])
         if buy_quantity > sell_quantity:
             order_type = "BUY"  # the stock has been purchased
             quantity = buy_quantity - sell_quantity
-            profit = (position['last_price'] - position['average_price']) * position['quantity']
-            percentage_diff = shakuntala.calculate_percentage_difference(position['last_price'],
-                                                                         position['average_price'])
+            last_buy_order = dukaandaar.get_last_buy_order(symbol)
+            profit = (current_price - last_buy_order['average_price']) * abs(position['quantity'])
+            percentage_diff = shakuntala.calculate_percentage_difference(current_price,
+                                                                         last_buy_order['price'])
             if logging == "debug":
                 print("Position change for stock", position['tradingsymbol'], profit, percentage_diff)
             if percentage_diff > 0.5:
-                dukaandaar.execute_sell_order(position['tradingsymbol'], position['quantity'], position['last_price'])
+                dukaandaar.execute_sell_order(position['tradingsymbol'], position['quantity'], current_price)
                 delete_sip_buy_order_today(position['tradingsymbol'])
         else:
             order_type = "SELL"
             quantity = sell_quantity - buy_quantity
-            profit = (position['average_price'] - position['last_price']) * position['quantity']
-            percentage_diff = shakuntala.calculate_percentage_difference(position['average_price'],
-                                                                         position['last_price'])
+            last_sell_order = dukaandaar.get_last_sell_order(symbol)
+            profit = (last_sell_order['average_price'] - current_price) * abs(position['quantity'])
+            percentage_diff = shakuntala.calculate_percentage_difference(last_sell_order['price'],
+                                                                         current_price)
             if logging == "debug":
                 print("Day change for stock", position['tradingsymbol'], profit, percentage_diff)
             if percentage_diff > 0.5:
-                dukaandaar.execute_buy_order(position['tradingsymbol'], position['quantity'], position['last_price'])
+                dukaandaar.execute_buy_order(position['tradingsymbol'], current_price, current_price*quantity)
 
 # while True:
 #     run()
