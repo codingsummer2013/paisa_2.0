@@ -21,7 +21,6 @@ for symbol in get_stocks_to_load():
         time = index.strftime('%Y-%m-%d')  # Convert the index to a string or use a suitable time format
         price = row['Adj Close']
         # Create a dictionary with time as the key and price as the value
-        price_dict = {'time': time, 'price': price}
         symbol_data = historical_data_wrapper.get(symbol)
         symbol_day_info = {'time': time, 'price': price}
         symbol_data.append(symbol_day_info)

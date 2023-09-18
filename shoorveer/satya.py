@@ -13,3 +13,10 @@ def read_nifty_50():
             break
         nifty50.append(line.strip())
     return nifty50
+
+
+def same_week(date1, date2):
+    # Check if the isocalendar week and year are the same for both dates
+    if date1.isocalendar()[1] == date2.isocalendar()[1] and date1.year == date2.year:
+        return True
+    return False
