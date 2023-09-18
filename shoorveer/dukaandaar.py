@@ -15,14 +15,30 @@ def price(symbol):
 
 def execute_buy_order(name, price, amount):
     try:
-        order_id = kite.place_order(tradingsymbol= "NSE:"+name,
+        order_id = kite.place_order(tradingsymbol=name,
                                     exchange=kite.EXCHANGE_NSE,
                                     transaction_type=kite.TRANSACTION_TYPE_BUY,
-                                    quantity=int(int(amount) / price),
+                                    quantity=max(int(int(amount) / price), 1),
                                     order_type=kite.ORDER_TYPE_LIMIT,
                                     price=price,
                                     product=kite.PRODUCT_CNC,
                                     variety=kite.VARIETY_REGULAR)
-        print("Order placed. ID is: ", order_id)
-    except :
-        print("Exception in executing order")
+        print("Order placed. ID is: ", order_id, name, price)
+    except Exception as e:
+        print("Exception in executing order", e)
+
+
+def execute_sell_order(name, quantity, price):
+    order_id = kite.place_order(tradingsymbol=name,
+                                    exchange=kite.EXCHANGE_NSE,
+                                    transaction_type=kite.TRANSACTION_TYPE_SELL,
+                                    quantity=quantity,
+                                    order_type=kite.ORDER_TYPE_LIMIT,
+                                    price=price,
+                                    product=kite.PRODUCT_CNC,
+                                    variety=kite.VARIETY_REGULAR)
+    print("Order placed. ID is: {}".format(order_id))
+
+
+def positions():
+    return kite.positions()['net']
