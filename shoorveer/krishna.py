@@ -12,8 +12,6 @@ def get_stocks_to_load():
 
 def run():
     for symbol in get_stocks_to_load():
-        if logging == "debug":
-            print("Stock", symbol)
         historical_data = historical_data_wrapper.get(symbol)
         price_source = "Historical"
         price_to_buy = historical_data_ops.calculate_average_price(historical_data)
@@ -23,9 +21,10 @@ def run():
             price_source = "Today Orders"
         last_price = dukaandaar.price(symbol)
         percentage_diff = shakuntala.calculate_percentage_difference(last_price, price_to_buy)
+        if logging == "debug":
+            print("Percentage diff is", percentage_diff, "for ", symbol)
         if percentage_diff is not None and percentage_diff < -1 * percentage_diff_value\
                 and dukaandaar.get_closing_price(symbol) > last_price:
-            print("Percentage diff is", percentage_diff, "for ", symbol)
             dukaandaar.execute_buy_order(symbol, last_price, buy_amount)
 
 # while True:
