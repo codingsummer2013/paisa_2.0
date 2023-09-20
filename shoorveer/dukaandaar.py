@@ -48,6 +48,17 @@ def positions():
     return kite.positions()['net']
 
 
+def get_first_buy_order(symbol):
+    sleep(2)
+    orders = kite.orders()
+    last_buy_order = None
+    for order in orders:
+        if order['transaction_type'] == 'BUY' and order['tradingsymbol'] == symbol:
+            if last_buy_order is None or order['order_timestamp'] < last_buy_order['order_timestamp']:
+                last_buy_order = order
+    return last_buy_order
+
+
 def get_last_buy_order(symbol):
     sleep(2)
     orders = kite.orders()
@@ -59,6 +70,28 @@ def get_last_buy_order(symbol):
     return last_buy_order
 
 
+def get_minimum_buy_order(symbol):
+    sleep(2)
+    orders = kite.orders()
+    minimum_buy_order = None
+    for order in orders:
+        if order['transaction_type'] == 'BUY' and order['tradingsymbol'] == symbol:
+            if minimum_buy_order is None or order['average_price'] < minimum_buy_order['average_price']:
+                minimum_buy_order = order
+    return minimum_buy_order
+
+
+def get_maximum_buy_order(symbol):
+    sleep(2)
+    orders = kite.orders()
+    maximum_buy_order = None
+    for order in orders:
+        if order['transaction_type'] == 'BUY' and order['tradingsymbol'] == symbol:
+            if maximum_buy_order is None or order['average_price'] > maximum_buy_order['average_price']:
+                maximum_buy_order = order
+    return maximum_buy_order
+
+
 def get_last_sell_order(symbol):
     sleep(2)
     orders = kite.orders()
@@ -68,6 +101,17 @@ def get_last_sell_order(symbol):
             if last_sell_order is None or order['order_timestamp'] > last_sell_order['order_timestamp']:
                 last_sell_order = order
     return last_sell_order
+
+
+def get_minimum_sell_order(symbol):
+    sleep(2)
+    orders = kite.orders()
+    minimum_sell_order = None
+    for order in orders:
+        if order['transaction_type'] == 'SELL' and order['tradingsymbol'] == symbol:
+            if minimum_sell_order is None or order['average_price'] < minimum_sell_order['average_price']:
+                minimum_sell_order = order
+    return minimum_sell_order
 
 
 def get_closing_price(symbol):

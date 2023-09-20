@@ -28,7 +28,7 @@ def run():
         if buy_quantity > sell_quantity:
             order_type = "BUY"  # the stock has been purchased
             quantity = buy_quantity - sell_quantity
-            last_buy_order = dukaandaar.get_last_buy_order(symbol)
+            last_buy_order = dukaandaar.get_maximum_buy_order(symbol)
             profit = (current_price - last_buy_order['average_price']) * abs(position['quantity'])
             percentage_diff = shakuntala.calculate_percentage_difference(current_price,
                                                                          last_buy_order['price'])
@@ -40,7 +40,7 @@ def run():
         else:
             order_type = "SELL"
             quantity = sell_quantity - buy_quantity
-            last_sell_order = dukaandaar.get_last_sell_order(symbol)
+            last_sell_order = dukaandaar.get_minimum_sell_order(symbol)
             profit = (last_sell_order['average_price'] - current_price) * abs(position['quantity'])
             percentage_diff = shakuntala.calculate_percentage_difference(last_sell_order['price'],
                                                                          current_price)
