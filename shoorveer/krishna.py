@@ -1,7 +1,7 @@
 from chitragupta import historical_data_wrapper, historical_data_ops
 from shoorveer import satya, dukaandaar, shakuntala
 
-percentage_diff_value = 0.5
+percentage_diff_value = 1
 buy_amount = 5000
 logging = "debug"
 
@@ -25,7 +25,7 @@ def run():
             print("Percentage diff is", percentage_diff, "for ", symbol)
         if percentage_diff is not None and percentage_diff < -1 * percentage_diff_value\
                 and dukaandaar.get_closing_price(symbol) > last_price:
-            dukaandaar.execute_buy_order(symbol, last_price, buy_amount)
+            dukaandaar.execute_buy_order(symbol, shakuntala.calculate_99_75_percent(last_price), buy_amount)
 
 # while True:
 #     run()
