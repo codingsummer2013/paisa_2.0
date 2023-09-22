@@ -47,7 +47,9 @@ def run():
             if logging == "debug":
                 print("Day change for stock", position['tradingsymbol'], profit, percentage_diff)
             if percentage_diff > 0.5:
-                dukaandaar.execute_buy_order_with_quantity(position['tradingsymbol'], shakuntala.calculate_99_75_percent(current_price), quantity)
+                little_low_price = shakuntala.calculate_99_75_percent(current_price)
+                print("Last compared price", current_price, little_low_price)
+                dukaandaar.execute_buy_order_with_quantity(position['tradingsymbol'], current_price, quantity)
 
 # while True:
 #     run()

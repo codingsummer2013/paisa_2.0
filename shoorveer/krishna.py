@@ -25,7 +25,9 @@ def run():
             print("Percentage diff is", percentage_diff, "for ", symbol)
         if percentage_diff is not None and percentage_diff < -1 * percentage_diff_value\
                 and dukaandaar.get_closing_price(symbol) > last_price:
-            dukaandaar.execute_buy_order(symbol, shakuntala.calculate_99_75_percent(last_price), buy_amount)
+            little_low_price = shakuntala.calculate_99_75_percent(last_price)
+            print("Last compared price", last_price, little_low_price)
+            dukaandaar.execute_buy_order(symbol, last_price, buy_amount)
 
 # while True:
 #     run()
