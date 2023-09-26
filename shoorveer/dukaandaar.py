@@ -69,7 +69,7 @@ def get_first_buy_order(symbol):
     orders = kite.orders()
     last_buy_order = None
     for order in orders:
-        if order['transaction_type'] == 'BUY' and order['tradingsymbol'] == symbol:
+        if order['transaction_type'] == 'BUY' and order['status'] == 'COMPLETE' and order['tradingsymbol'] == symbol:
             if last_buy_order is None or order['order_timestamp'] < last_buy_order['order_timestamp']:
                 last_buy_order = order
     return last_buy_order
@@ -80,7 +80,7 @@ def get_last_buy_order(symbol):
     orders = kite.orders()
     last_buy_order = None
     for order in orders:
-        if order['transaction_type'] == 'BUY' and order['tradingsymbol'] == symbol:
+        if order['transaction_type'] == 'BUY' and order['status'] == 'COMPLETE' and order['tradingsymbol'] == symbol:
             if last_buy_order is None or order['order_timestamp'] > last_buy_order['order_timestamp']:
                 last_buy_order = order
     return last_buy_order
@@ -91,7 +91,7 @@ def get_minimum_buy_order(symbol):
     orders = kite.orders()
     minimum_buy_order = None
     for order in orders:
-        if order['transaction_type'] == 'BUY' and order['tradingsymbol'] == symbol:
+        if order['transaction_type'] == 'BUY' and order['status'] == 'COMPLETE' and order['tradingsymbol'] == symbol:
             if minimum_buy_order is None or order['average_price'] < minimum_buy_order['average_price']:
                 minimum_buy_order = order
     return minimum_buy_order
@@ -102,7 +102,7 @@ def get_maximum_buy_order(symbol):
     orders = kite.orders()
     maximum_buy_order = None
     for order in orders:
-        if order['transaction_type'] == 'BUY' and order['tradingsymbol'] == symbol:
+        if order['transaction_type'] == 'BUY' and order['status'] == 'COMPLETE' and order['tradingsymbol'] == symbol:
             if maximum_buy_order is None or order['average_price'] > maximum_buy_order['average_price']:
                 maximum_buy_order = order
     return maximum_buy_order
@@ -113,7 +113,7 @@ def get_last_sell_order(symbol):
     orders = kite.orders()
     last_sell_order = None
     for order in orders:
-        if order['transaction_type'] == 'SELL' and order['tradingsymbol'] == symbol:
+        if order['transaction_type'] == 'SELL' and order['status'] == 'COMPLETE' and order['tradingsymbol'] == symbol:
             if last_sell_order is None or order['order_timestamp'] > last_sell_order['order_timestamp']:
                 last_sell_order = order
     return last_sell_order
@@ -124,7 +124,7 @@ def get_minimum_sell_order(symbol):
     orders = kite.orders()
     minimum_sell_order = None
     for order in orders:
-        if order['transaction_type'] == 'SELL' and order['tradingsymbol'] == symbol:
+        if order['transaction_type'] == 'SELL' and order['status'] == 'COMPLETE' and order['tradingsymbol'] == symbol:
             if minimum_sell_order is None or order['average_price'] < minimum_sell_order['average_price']:
                 minimum_sell_order = order
     return minimum_sell_order
@@ -133,6 +133,5 @@ def get_minimum_sell_order(symbol):
 def get_closing_price(symbol):
     sleep(2)
     return kite.quote("NSE:" + symbol)["NSE:" + symbol]['ohlc']['close']
-
 
 # price("ITC")
