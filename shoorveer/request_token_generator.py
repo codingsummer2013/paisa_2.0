@@ -2,6 +2,7 @@ from urllib.parse import urlparse, parse_qs
 
 from kiteconnect import KiteConnect
 
+from chitragupta import itihaas_loader
 
 kite = KiteConnect(api_key="tf77pivddr8pmyin")
 
@@ -16,3 +17,4 @@ print("Request_token", captured_value.strip())
 data = kite.generate_session(captured_value, api_secret="pol1gkoy18dx1x3qa9xdyvs3er3cxxe4")
 file.write(data["access_token"])
 print("Request token generated", data)
+itihaas_loader.load()
