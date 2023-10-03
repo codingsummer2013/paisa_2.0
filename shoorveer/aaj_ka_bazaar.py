@@ -40,6 +40,8 @@ def run():
         else:
             order_type = "SELL"
             quantity = sell_quantity - buy_quantity
+            if quantity == 0:
+                continue
             last_sell_order = dukaandaar.get_minimum_sell_order(symbol)
             profit = (last_sell_order['average_price'] - current_price) * abs(position['quantity'])
             percentage_diff = shakuntala.calculate_percentage_difference(last_sell_order['price'],

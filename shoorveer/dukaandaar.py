@@ -62,6 +62,7 @@ def execute_sell_order(name, quantity, price):
     except Exception as e:
         print("Exception in executing order", e)
 
+
 def positions():
     return kite.positions()['net']
 
