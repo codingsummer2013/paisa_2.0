@@ -1,1 +1,1 @@
-http://127.0.0.1:19291/kite-redirect?action=login&type=login&status=success&request_token=3ItETAhnteT5uc8UN9ICDqDp3lBLnvo5
+http://127.0.0.1:19291/kite-redirect?status=success&request_token=86B0KRQ5O2BWfJRgd4ZXGNmpuSLVgbt4&action=login&type=login
