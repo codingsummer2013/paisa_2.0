@@ -1,5 +1,6 @@
 from chitragupta import historical_data_wrapper, historical_data_ops
 from shoorveer import satya, dukaandaar, shakuntala
+from shoorveer.continuity import disable_new_buy
 
 percentage_diff_value = 1
 buy_amount = 5000
@@ -27,7 +28,8 @@ def run():
                 and dukaandaar.get_closing_price(symbol) > last_price:
             little_low_price = shakuntala.calculate_99_75_percent(last_price)
             print("Last compared price", last_price, little_low_price)
-            dukaandaar.execute_buy_order(symbol, last_price, buy_amount)
+            if not disable_new_buy:
+                dukaandaar.execute_buy_order(symbol, last_price, buy_amount)
 
 # while True:
 #     run()

@@ -9,6 +9,7 @@ from shoorveer import satya, dukaandaar, shakuntala
 percentage_diff_value = 0.5
 buy_amount = 5000
 logging = "debug"
+disable_new_buy = True
 
 
 def get_stocks_to_load():
@@ -41,8 +42,8 @@ def run():
             sip_order_info = {'time': datetime.today().strftime("%Y-%m-%d"), 'price': last_price}
             sip_order_data.append(sip_order_info)
             sip_orders_wrapper.put(symbol, sip_order_data)
-            dukaandaar.execute_buy_order(symbol, last_price, buy_amount)
-
+            if not disable_new_buy:
+                dukaandaar.execute_buy_order(symbol, last_price, buy_amount)
 
 # while True:
 #     run()
