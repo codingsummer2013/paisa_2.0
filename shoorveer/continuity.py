@@ -9,7 +9,7 @@ from shoorveer import satya, dukaandaar, shakuntala
 percentage_diff_value = 0.5
 buy_amount = 5000
 logging = "debug"
-disable_new_buy = True
+disable_new_buy = False
 
 
 def get_stocks_to_load():
