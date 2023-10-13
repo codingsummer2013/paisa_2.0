@@ -29,6 +29,8 @@ def run():
             order_type = "BUY"  # the stock has been purchased
             quantity = buy_quantity - sell_quantity
             last_buy_order = dukaandaar.get_maximum_buy_order(symbol)
+            if last_buy_order is None:
+                continue
             profit = (current_price - last_buy_order['average_price']) * abs(position['quantity'])
             percentage_diff = shakuntala.calculate_percentage_difference(current_price,
                                                                          last_buy_order['price'])
