@@ -3,7 +3,7 @@ from shoorveer import satya, dukaandaar, shakuntala
 from shoorveer.continuity import disable_new_buy
 
 percentage_diff_value = 1
-buy_amount = 5000
+buy_amount = 10000
 logging = "debug"
 
 

@@ -1,4 +1,5 @@
 from datetime import datetime
+from time import sleep
 
 from chitragupta import sip_orders_wrapper
 from shoorveer import dukaandaar, shakuntala, satya
@@ -35,8 +36,8 @@ def run():
             percentage_diff = shakuntala.calculate_percentage_difference(current_price,
                                                                          last_buy_order['price'])
             if logging == "debug":
-                print("Position change for stock", position['tradingsymbol'], profit, percentage_diff)
-            if percentage_diff > 0.5:
+                print("day change for stock", position['tradingsymbol'], profit, percentage_diff)
+            if percentage_diff > 1:
                 dukaandaar.execute_sell_order(position['tradingsymbol'], position['quantity'], current_price)
                 delete_sip_buy_order_today(position['tradingsymbol'])
         else:
@@ -50,11 +51,12 @@ def run():
                                                                          current_price)
             if logging == "debug":
                 print("Day change for stock", position['tradingsymbol'], profit, percentage_diff)
-            if percentage_diff > 0.5:
+            if percentage_diff > 1:
                 little_low_price = shakuntala.calculate_99_75_percent(current_price)
                 print("Last compared price", current_price, little_low_price)
                 dukaandaar.execute_buy_order_with_quantity(position['tradingsymbol'], current_price, quantity)
 
+#
 # while True:
 #     run()
 #     sleep(100)

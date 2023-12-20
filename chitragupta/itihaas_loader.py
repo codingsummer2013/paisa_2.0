@@ -27,7 +27,7 @@ def load():
         pass
 
     for symbol in get_stocks_to_load():
-        stock_data = yf.download(symbol + ".ns", start="2023-07-01", end=datetime.today().strftime("%Y-%m-%d"))
+        stock_data = yf.download(symbol + ".ns", start="2023-12-01", end=datetime.today().strftime("%Y-%m-%d"))
         for index, row in stock_data.iterrows():
             # Extract the time (index) and 'Adj Close' price from each row
             time = index.strftime('%Y-%m-%d')  # Convert the index to a string or use a suitable time format
