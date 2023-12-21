@@ -6,9 +6,9 @@ from time import sleep
 from chitragupta import sip_orders_wrapper, historical_data_wrapper
 from shoorveer import satya, dukaandaar, shakuntala
 
-buy_amount = 10000
+buy_amount = 5000
 logging = "debug"
-disable_new_buy = False
+disable_new_buy = True
 force_buy_today = True
 
 def get_stocks_to_load():
