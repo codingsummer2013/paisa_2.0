@@ -1,0 +1,8 @@
+BRITANNIA~~~{"action": "sell", "price": 5345, "quantity": 1}
+EICHERMOT~~~{"action": "sell", "price": 4117, "quantity": 1}
+HDFCBANK~~~{"action": "sell", "price": 1712.1, "quantity": 2}
+HINDUNILVR~~~{"action": "sell", "price": 2659.8, "quantity": 1}
+ITC~~~{"action": "sell", "price": 464.25, "quantity": 10}
+LTIM~~~{"action": "sell", "price": 6283, "quantity": 1}
+JSWSTEEL~~~{"action": "sell", "price": 883.85, "quantity": 5}
+LT~~~{"action": "sell", "price": 3520.25, "quantity": 1}

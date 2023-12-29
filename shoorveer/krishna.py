@@ -2,8 +2,8 @@ from chitragupta import historical_data_wrapper, historical_data_ops
 from shoorveer import satya, dukaandaar, shakuntala
 from shoorveer.continuity import disable_new_buy
 
-percentage_diff_value = 1
-buy_amount = 5000
+percentage_diff_value = 0.5
+buy_amount = 10000
 logging = "debug"
 
 

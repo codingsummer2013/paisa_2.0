@@ -137,4 +137,7 @@ def get_closing_price(symbol):
     sleep(2)
     return kite.quote("NSE:" + symbol)["NSE:" + symbol]['ohlc']['close']
 
+
+def get_holdings():
+    return kite.holdings()
 # price("ITC")

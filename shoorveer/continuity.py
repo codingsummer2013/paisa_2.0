@@ -6,10 +6,11 @@ from time import sleep
 from chitragupta import sip_orders_wrapper, historical_data_wrapper
 from shoorveer import satya, dukaandaar, shakuntala
 
-buy_amount = 5000
+buy_amount = 10000
 logging = "debug"
-disable_new_buy = True
+disable_new_buy = False
 force_buy_today = True
+PERCENTAGE_DIFF_SIP = 0.2
 
 def get_stocks_to_load():
     return satya.read_nifty_50()
@@ -23,7 +24,7 @@ def run():
         if len(sip_order_data) >= 1:
             last_available_record = sip_order_data[-1]  # Assign the last element
             price_to_buy = last_available_record["price"]
-            price_source = "Purchase Source"
+            price_source = "Price Fetched from last SIP Order"
             last_purchased_date = last_available_record["time"]
             if satya.same_week(datetime.today(), datetime.strptime(last_purchased_date, "%Y-%m-%d")):
                 continue
@@ -32,14 +33,14 @@ def run():
             last_available_record = market_available_data[-1]  # Assign the last element
             if price_to_buy is None or price_to_buy > last_available_record["price"]:
                 price_to_buy = last_available_record["price"]
-                price_source = "Market Source"
+                price_source = "Price Fetched from last closing day"
         last_price = dukaandaar.price(symbol)
         if force_buy_today:
             price_to_buy = market_available_data[-1]["price"]
         percentage_diff = shakuntala.calculate_percentage_difference(last_price, price_to_buy)
         if logging == "debug":
-            print("Percentage diff is", percentage_diff, "for ", symbol)
-        if percentage_diff is not None and percentage_diff < -0.2:
+            print("Percentage diff is", percentage_diff, "for ", symbol, "Price source", price_source)
+        if percentage_diff is not None and percentage_diff < -1 * PERCENTAGE_DIFF_SIP:
             sip_order_info = {'time': datetime.today().strftime("%Y-%m-%d"), 'price': last_price}
             sip_order_data.append(sip_order_info)
             sip_orders_wrapper.put(symbol, sip_order_data)
