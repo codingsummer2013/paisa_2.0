@@ -39,3 +39,5 @@ def load():
             historical_data_wrapper.put(symbol, symbol_data)
     historical_data_wrapper.update_db_file()
     print("Historical data downloaded and saved.")
+
+load()
