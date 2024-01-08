@@ -5,7 +5,7 @@ from shoorveer.continuity import disable_new_buy
 buy_amount = 10000
 logging = "debug"
 first_sell_amount = 10000
-PERCENTAGE_ROLL_OVER = 0.5
+PERCENTAGE_ROLL_OVER = 0.8
 
 def get_stocks_to_load():
     return satya.read_nifty_50()

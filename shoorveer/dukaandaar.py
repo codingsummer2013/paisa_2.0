@@ -12,7 +12,11 @@ kite.set_access_token(token.readline())
 
 def price(symbol):
     sleep(2)
-    return kite.quote("NSE:" + symbol)["NSE:" + symbol]['last_price']
+    try:
+        return kite.quote("NSE:" + symbol)["NSE:" + symbol]['last_price']
+    except Exception as e:
+        print("Exception in executing order", e)
+        sleep(1000)
 
 
 def execute_buy_order(name, price, amount):
@@ -29,6 +33,7 @@ def execute_buy_order(name, price, amount):
         sleep(2)
     except Exception as e:
         print("Exception in executing order", e)
+        sleep(1000)
 
 
 def execute_buy_order_with_quantity(name, price, quantity):
@@ -45,6 +50,7 @@ def execute_buy_order_with_quantity(name, price, quantity):
         sleep(2)
     except Exception as e:
         print("Exception in executing order", e)
+        sleep(1000)
 
 
 def execute_sell_order(name, quantity, price):
@@ -61,10 +67,15 @@ def execute_sell_order(name, quantity, price):
         sleep(2)
     except Exception as e:
         print("Exception in executing order", e)
+        sleep(1000)
 
 
 def positions():
-    return kite.positions()['net']
+    try:
+        return kite.positions()['net']
+    except Exception as e:
+        print("Exception in executing order", e)
+        sleep(1000)
 
 
 def get_first_buy_order(symbol):
@@ -80,7 +91,12 @@ def get_first_buy_order(symbol):
 
 def get_last_buy_order(symbol):
     sleep(2)
-    orders = kite.orders()
+    try:
+        orders = kite.orders()
+    except Exception as e:
+        print("Exception in executing order", e)
+        sleep(1000)
+        return
     last_buy_order = None
     for order in orders:
         if order['transaction_type'] == 'BUY' and order['status'] == 'COMPLETE' and order['tradingsymbol'] == symbol:
@@ -91,7 +107,12 @@ def get_last_buy_order(symbol):
 
 def get_minimum_buy_order(symbol):
     sleep(2)
-    orders = kite.orders()
+    try:
+        orders = kite.orders()
+    except Exception as e:
+        print("Exception in executing order", e)
+        sleep(1000)
+        return
     minimum_buy_order = None
     for order in orders:
         if order['transaction_type'] == 'BUY' and order['status'] == 'COMPLETE' and order['tradingsymbol'] == symbol:
@@ -102,7 +123,12 @@ def get_minimum_buy_order(symbol):
 
 def get_maximum_buy_order(symbol):
     sleep(2)
-    orders = kite.orders()
+    try:
+        orders = kite.orders()
+    except Exception as e:
+        print("Exception in executing order", e)
+        sleep(1000)
+        return
     maximum_buy_order = None
     for order in orders:
         if order['transaction_type'] == 'BUY' and order['status'] == 'COMPLETE' and order['tradingsymbol'] == symbol:
@@ -113,7 +139,12 @@ def get_maximum_buy_order(symbol):
 
 def get_last_sell_order(symbol):
     sleep(2)
-    orders = kite.orders()
+    try:
+        orders = kite.orders()
+    except Exception as e:
+        print("Exception in executing order", e)
+        sleep(1000)
+        return
     last_sell_order = None
     for order in orders:
         if order['transaction_type'] == 'SELL' and order['status'] == 'COMPLETE' and order['tradingsymbol'] == symbol:
@@ -124,7 +155,12 @@ def get_last_sell_order(symbol):
 
 def get_minimum_sell_order(symbol):
     sleep(2)
-    orders = kite.orders()
+    try:
+        orders = kite.orders()
+    except Exception as e:
+        print("Exception in executing order", e)
+        sleep(1000)
+        return
     minimum_sell_order = None
     for order in orders:
         if order['transaction_type'] == 'SELL' and order['status'] == 'COMPLETE' and order['tradingsymbol'] == symbol:
@@ -135,9 +171,19 @@ def get_minimum_sell_order(symbol):
 
 def get_closing_price(symbol):
     sleep(2)
-    return kite.quote("NSE:" + symbol)["NSE:" + symbol]['ohlc']['close']
+    try:
+        return kite.quote("NSE:" + symbol)["NSE:" + symbol]['ohlc']['close']
+    except Exception as e:
+        print("Exception in executing order", e)
+        sleep(1000)
+        return
 
 
 def get_holdings():
-    return kite.holdings()
+    try:
+        return kite.holdings()
+    except Exception as e:
+        print("Exception in executing order", e)
+        sleep(1000)
+        return
 # price("ITC")
